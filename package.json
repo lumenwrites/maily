@@ -1,35 +1,37 @@
 {
-    "name": "maily",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "engines": {
-	"node": "8.6.0",
-	"npm": "5.4.2"
-    },
-    "main": "server/server.js",
-    "scripts": {
-	"start": "node index.js",
-	"babel-node": "babel-node --presets=latest",
-	"develop": "nodemon --exec npm run babel-node -- ./server/server.js",
-	"build-server": "babel ./server/server.js -d ./server/dist",
-	"serve": "node ./server/dist/server/server.js"	
-    },
-    "author": "",
-    "license": "ISC",
-    "dependencies": {
-	"express": "^4.16.1",
-	"react": "^16.0.0"
-    },
-    "devDependencies": {
-	"babel-cli": "^6.26.0",
-	"babel-preset-latest": "^6.24.1",
-	"nodemon": "^1.12.1",
-	"webpack": "^3.6.0"
-    },
-    "babel": {
-	"presets": [
-	    "latest"
-	]
-    }    
+   "name": "maily",
+   "version": "1.0.0",
+   "description": "",
+   "main": "server/server.js",
+   "engines": {
+      "node": "8.6.0",
+      "npm": "5.4.2"
+   },
+   "scripts": {
+      "develop": "nodemon --exec babel-node --presets=latest -- ./server/server.js",
+      "build-server": "babel ./server/server.js -d ./server/dist",
+      "serve": "node ./server/dist/server/server.js"
+   },
+   "author": "",
+   "license": "ISC",
+   "dependencies": {
+      "cookie-session": "^2.0.0-beta.3",
+      "ejs": "^2.5.7",
+      "express": "^4.16.2",
+      "mongoose": "^4.12.1",
+      "passport": "^0.4.0",
+      "passport-google-oauth20": "^1.0.0",
+      "react": "^16.0.0"
+   },
+   "devDependencies": {
+      "babel-cli": "^6.26.0",
+      "babel-preset-latest": "^6.24.1",
+      "nodemon": "^1.12.1",
+      "webpack": "^3.6.0"
+   },
+   "babel": {
+      "presets": [
+         "latest"
+      ]
+   }
 }
