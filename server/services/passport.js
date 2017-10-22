@@ -50,30 +50,26 @@ passport.use(
 	    clientID: keys.googleClientID,
 	    clientSecret: keys.googleClientSecret,
 	    callbackURL: '/auth/google/callback'
-	}, (accessToken, refreshToken, profile, done)=>{
+	},
+	async (accessToken, refreshToken, profile, done)=>{
 	    /* When google redirects you to /auth/google/callback and gives you the code,
 	       passport automatically goes to google and fetches the profile data. */
-	    User.findOne({
-		googleId: profile.id
-	    }).then((existingUser)=>{
-		/* Check if user already exists. */
-		if (existingUser) {
-		    console.log(`User ${profile.emails[0].value} already exists!`)
-		    /* Once finished creating/getting user, I can call done that
-		       tells passport to move along. */
-		    done(null, existingUser)
-		} else {
-		    new User({
-			googleId: profile.id,
-			email: profile.emails[0].value
-		    }).save()
-		      .then((createdUser, err) => {
-			  if (err) { console.log(err); }
-			  console.log(`User ${profile.emails[0].value} created!`)
-			  done(null, createdUser)
-		      })
-		}
-	    })
+	    const existingUser = await User.findOne({ googleId: profile.id })
+
+	    /* Check if user already exists. */
+	    if (existingUser) {
+		console.log(`User ${profile.emails[0].value} already exists!`)
+		/* Once finished creating/getting user, I can call done that
+		   tells passport to move along. */
+		done(null, existingUser)
+	    } else {
+		const createdUser = await new User({
+		    googleId: profile.id,
+		    email: profile.emails[0].value
+		}).save()
+		console.log(`User ${profile.emails[0].value} created!`)
+		done(null, createdUser)
+	    }
 
 
 	}

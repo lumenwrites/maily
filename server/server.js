@@ -46,21 +46,15 @@ mongoose.connect(MONGO_DB_URL, (error) => {
 app.use('/auth', usersRoutes)
 app.use('/', usersRoutes)
 
-
-/* Serve static files */
-app.use('/static', express.static(path.resolve(__dirname, './static')))
-
-
-// Routes
-app.get('/', (req, res) => {
-    /* res.render('index', {html: 'Hello'})*/
-    console.log(req)
-    res.send('Hi there!')
-})
+/* Serve client react app */
+/* Static files */
+app.use('/', express.static(path.resolve(__dirname, '../client/build/static')))
+/* Send the rest of the requests to be handled by the react router */
+app.use((req, res) =>
+    res.sendFile(path.resolve(__dirname, '../client/build/index.html')));
 
 /* Serve */
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3020
 app.listen(port, function () {
     console.log(`Running on port ${port}!`)
 })
-
