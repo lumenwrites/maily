@@ -15,12 +15,10 @@ const INITIAL_STATE = {}
 const store = createStore(
     reducers,
     INITIAL_STATE,
-    applyMiddleware(reduxThunk),
-    /* Enable redux dev tools */
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
     /* Redux Thunk is middleware for Redux that gives me access to dispatch function,
        which allows me to do async stuff in action creators,
        manually dispatching actions once async stuff resolves. */    
+    applyMiddleware(reduxThunk)
 )
 
 

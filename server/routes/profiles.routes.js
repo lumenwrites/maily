@@ -20,10 +20,11 @@ router.route('/user').get((req, res)=>{
 })
 
 /* Logout */
-router.route('/api/logout').get((req, res)=>{
+router.route('/logout').get((req, res)=>{
     /* Passport attaches .logout() function to req object.  */
     req.logout()
-    res.send(req.user)
+    /* res.send(req.user)*/
+    res.redirect('/')
 })
 
 
@@ -40,7 +41,10 @@ router.route('/google').get(
    Google redirects a person here, with the code I need to access stuff.
    Passport sees the code in the url and knows it can use it.*/
 router.route('/google/callback').get(
-    passport.authenticate('google')
+    passport.authenticate('google'),
+    (req, res) => {
+	res.redirect('/dashboard')
+    }
 )
 
 export default router
