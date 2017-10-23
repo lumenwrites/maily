@@ -49,7 +49,7 @@ passport.use(
 	{
 	    clientID: keys.googleClientID,
 	    clientSecret: keys.googleClientSecret,
-	    callbackURL: '/auth/google/callback'
+	    callbackURL: '/api/v1/profiles/google/callback'
 	},
 	async (accessToken, refreshToken, profile, done)=>{
 	    /* When google redirects you to /auth/google/callback and gives you the code,

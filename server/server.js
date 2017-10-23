@@ -6,7 +6,7 @@ import cookieSession from 'cookie-session'
 import passport from 'passport'
 
 /* Import Routes */
-import usersRoutes from './routes/users.routes.js'
+import profilesRoutes from './routes/profiles.routes.js'
 
 /* Import config */
 import keys from './config/keys'
@@ -23,7 +23,7 @@ app.use(cookieSession({
     keys: [keys.cookieKey]
 }))
 /* Cookie extracts browser cookies and puts them into req.session
-   (stored before, by passport with Set-cookie header, when user auth'd)*/
+   (stored before, by passport with Set-cookie header, when user profiles'd)*/
 /* passport extracts id from cookie data, deserializes it, and returns me a user.*/
 /* And as a result, I have req.user.*/
 app.use(passport.initialize())
@@ -42,9 +42,9 @@ mongoose.connect(MONGO_DB_URL, (error) => {
 });
 
 
-/* Auth routes */
-app.use('/auth', usersRoutes)
-app.use('/', usersRoutes)
+/* API Routes */
+app.use('/api/v1/profiles', profilesRoutes);
+app.use('/', profilesRoutes)
 
 /* Serve client react app */
 /* Static files */

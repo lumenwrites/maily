@@ -13,7 +13,7 @@ import * as usersControllers from '../controllers/users.controllers';
 router.route('/').get(usersControllers.home)
 
 /* Get user */
-router.route('/api/current_user').get((req, res)=>{
+router.route('/user').get((req, res)=>{
     /* Passport deserializes cookie (finds user by id),
        attaches it to req, and then I send it back. */
     res.send(req.user)

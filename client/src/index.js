@@ -2,10 +2,10 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
-
+import reduxThunk from 'redux-thunk'
 
 /* Main component */
-import App from './components/App'
+import Main from './components/Main'
 
 /* Reducers */
 import reducers from './reducers/index.reducers'
@@ -15,9 +15,12 @@ const INITIAL_STATE = {}
 const store = createStore(
     reducers,
     INITIAL_STATE,
+    applyMiddleware(reduxThunk),
     /* Enable redux dev tools */
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-    applyMiddleware()
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    /* Redux Thunk is middleware for Redux that gives me access to dispatch function,
+       which allows me to do async stuff in action creators,
+       manually dispatching actions once async stuff resolves. */    
 )
 
 
@@ -27,6 +30,6 @@ const store = createStore(
    and whenever the store changes, it tells all child components to rerender */
 ReactDOM.render(
     <Provider store={store}>
-	<App/>
+	<Main/>
     </Provider>,
     document.querySelector("#root"))
